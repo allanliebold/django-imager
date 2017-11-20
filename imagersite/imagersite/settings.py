@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(os.environ.get('DEBUG', 'True')
+DEBUG = bool(os.environ.get('DEBUG', 'True'))
 
 ALLOWED_HOSTS = []
 
@@ -77,15 +77,15 @@ WSGI_APPLICATION = 'imagersite.wsgi.application'
 
 DATABASES = {
     'default': {
-    ¦   'ENGINE': 'django.db.backends.postgresql',
-    ¦   'NAME': os.environ.get('DB_NAME', ''),
-    ¦   'USER': os.environ.get('DB_USER', ''),
-    ¦   'PASSWORD': os.environ.get('DB_PASSWORD', ''),
-    ¦   'HOST': os.environ.get('DB_HOST', ''),
-    ¦   'PORT': 5432,
-    ¦   'TEST': {
-    ¦   ¦   'NAME': os.environ.get('TEST_DB', '')
-    ¦   }
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('DB_NAME', ''),
+        'USER': os.environ.get('DB_USER', ''),
+        'PASSWORD': os.environ.get('DB_PASSWORD', ''),
+        'HOST': os.environ.get('DB_HOST', ''),
+        'PORT': 5432,
+        'TEST': {
+            'NAME': os.environ.get('TEST_DB', '')
+        }
     }
 }
 
