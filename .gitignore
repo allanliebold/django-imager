@@ -103,3 +103,6 @@ ENV/
 # vim swap files
 *.swp
 *.swo
+
+# Django migrations
+migrations
