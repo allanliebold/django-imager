@@ -39,13 +39,13 @@ class ImagerProfile(models.Model):
     camera = models.CharField(
         max_length=2,
         choices=CAMERAS,
-        default='NIKON'
+        default='NK'
     )
 
     services = models.CharField(
         max_length=2,
         choices=SERVICES,
-        default='WEDDING'
+        default='WD'
     )
 
     photo_styles = models.CharField(
