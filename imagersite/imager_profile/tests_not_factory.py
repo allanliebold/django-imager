@@ -12,10 +12,14 @@ class StandardTest(TestCase):
 
     def test_one_profile_created_creates_one(self):
         """One profile created should have object length 1."""
-        profile = ImagerProfile()
-        # profile = ImagerProfile.objects.create(name='Apple')
-        profile.save()
+        self.profile = ImagerProfile()
+        self.user = User(username='fred', email="user@user.com")
+        self.user.set_password("jflakd")
+        self.user.save()
+        self.profile.user = self.user
+        self.profile.save()
         import pdb;pdb.set_trace()
+        # profile = ImagerProfile.objects.create(name='Apple')
 
 
 

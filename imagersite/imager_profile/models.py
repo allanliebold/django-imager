@@ -57,7 +57,6 @@ class ImagerProfile(models.Model):
         default='CL'
     )
 
-
     @property
     def is_active(self):
         """."""
