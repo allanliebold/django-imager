@@ -7,11 +7,14 @@ class ImageActiveProfile(models.Manager):
 
     def get_queryset(self):
         """."""
-        super(ImageActiveProfile, self).get_queryset().filter(is_active=True)
+        return super(ImageActiveProfile, self).get_queryset().filter(user__is_active=True)
 
 
 class ImagerProfile(models.Model):
     """Imager Profile Model."""
+
+    objects = models.Manager
+    active = ImageActiveProfile()
 
     CAMERAS = (
         ('NK', 'Nikon'),
@@ -30,11 +33,11 @@ class ImagerProfile(models.Model):
         ('CL', 'Color')
     )
 
-    website = models.URLField(default="example.com")
+    website = models.URLField(default="example.com", null=True)
     location = models.CharField(max_length=200, blank=True, null=True)
-    user = models.OneToOneField(User, related_name='profile')
+    user = models.OneToOneField(User, related_name='profile', null=True, on_delete=models.CASCADE)
     fee = models.FloatField(default=0.0)
-    phone = models.CharField(default="555-555-5555", max_length=100)
+    phone = models.CharField(max_length=100, blank=True, null=True)
 
     camera = models.CharField(
         max_length=2,
@@ -54,7 +57,6 @@ class ImagerProfile(models.Model):
         default='CL'
     )
 
-    active = ImageActiveProfile()
 
     @property
     def is_active(self):
