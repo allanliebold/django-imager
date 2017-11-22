@@ -13,7 +13,6 @@ class UserFactory(factory.django.DjangoModelFactory):
 class ProfileTest(TestCase):
     """."""
     def setUp(self):
-        import pdb;pdb.set_trace()
         profile = ImagerProfile(location='Seattle')
         for i in range(50):
             user = UserFactory.create()
@@ -26,13 +25,24 @@ class ProfileTest(TestCase):
 
     def test_user_can_point_to_its_profile(self):
         """."""
-        import pdb;pdb.set_trace()
         one_user = User.objects.get(id=50)
-        self.assertIsNotNone(one_user.profile)
-
-    def test_there_are_50_users(self):
-        """."""
         all_users = User.objects.all()
+        website = one_user.profile.website
+        location = one_user.profile.location
+        fee = one_user.profile.fee
+        phone = one_user.profile.phone
+        camera = one_user.profile.camera
+        services = one_user.profile.services
+        photo_styles = one_user.profile.photo_styles
+        # import pdb;pdb.set_trace()
+        self.assertIsNotNone(one_user.profile)
         self.assertEqual(len(all_users), 50)
-
-
+        self.assertEqual(str(one_user), "bob49")
+        self.assertEqual(one_user.email, "bob49@thestair.com")
+        self.assertEqual(website, "example.com")
+        self.assertEqual(location, "Seattle")
+        self.assertEqual(fee, 0.0)
+        self.assertEqual(phone, None)
+        self.assertEqual(camera, 'NK')
+        self.assertEqual(services, 'WD')
+        self.assertEqual(photo_styles, 'CL')
