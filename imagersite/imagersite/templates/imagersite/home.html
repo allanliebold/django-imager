@@ -7,11 +7,18 @@
   {% load static %}
   <img src="{% static 'example.jpg' %}" alt="Image" />
 
+  {% if request.user.is_authenticated %}
+    <p>Welcome {{ request.user.username }}</p>
+  {% else %}
 
   <p>Welcome! We are an imager sharing website.</p>
-
-  {% bootstrap_button "Login" button_type="submit" button_class="btn-primary" %}
-  {% bootstrap_button "Join" button_type="submit" button_class="btn-primary" %}
+  {% endif %}
+  <a href="{% url 'login' %}">
+    {% bootstrap_button "Login" button_type="submit" button_class="btn-primary" %}
+  </a>
+  <a href="{% url 'registration_register' %}">
+    {% bootstrap_button "Join" button_type="submit" button_class="btn-primary" %}
+  </a>
 
 {% endblock %}
 
