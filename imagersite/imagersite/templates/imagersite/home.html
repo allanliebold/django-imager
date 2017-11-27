@@ -13,12 +13,19 @@
 
   <p>Welcome! We are an imager sharing website.</p>
   {% endif %}
-  <a href="{% url 'login' %}">
-    {% bootstrap_button "Login" button_type="submit" button_class="btn-primary" %}
-  </a>
-  <a href="{% url 'registration_register' %}">
-    {% bootstrap_button "Join" button_type="submit" button_class="btn-primary" %}
-  </a>
+
+  {% if request.user.is_authenticated %}
+    <a href="{% url 'logout' %}">
+      {% bootstrap_button "Logout" button_type="submit" button_class="btn-primary" %}
+    </a>
+  {% else %}
+    <a href="{% url 'login' %}">
+      {% bootstrap_button "Login" button_type="submit" button_class="btn-primary" %}
+    </a>
+    <a href="{% url 'registration_register' %}">
+      {% bootstrap_button "Join" button_type="submit" button_class="btn-primary" %}
+    </a>
+  {% endif %}
 
 {% endblock %}
 
