@@ -19,7 +19,7 @@ class Photo(models.Model):
         ('PUBLIC', 'Public')
     ]
 
-    published = model.CharField(
+    published = models.CharField(
         max_length=10,
         choices=PUBLISHED,
         blank=True
@@ -44,7 +44,7 @@ class Album(models.Model):
         ('PUBLIC', 'Public')
     ]
 
-    published = model.CharField(
+    published = models.CharField(
         max_length=10,
         choices=PUBLISHED,
         blank=True

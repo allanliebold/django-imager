@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'imager_profile',
+    'imager_images',
     'imagersite',
     'bootstrap3'
 ]
