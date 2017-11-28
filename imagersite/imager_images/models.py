@@ -3,7 +3,7 @@ from imager_profile.models import ImagerProfile
 from multiselectfield import MultiSelectField
 
 class Photo(models.Model):
-    """."""
+    """Photo Model that creates a photo."""
 
     user = models.ForeignKey(ImagerProfile, related_name='photo')
     image = models.ImageField(upload_to='documents/%Y/%m/%d')

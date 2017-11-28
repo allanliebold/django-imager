@@ -8,8 +8,8 @@ class UserFactory(factory.django.DjangoModelFactory):
     """Factory to create users."""
     class Meta:
         model = User
-    username = factory.Sequence(lambda n: f'bob{n}')
-    email = factory.Sequence(lambda n: f'bob{n}@thestair.com')
+        username = factory.Sequence(lambda n: f'bob{n}')
+        email = factory.Sequence(lambda n: f'bob{n}@thestair.com')
 
 
 class ProfileTest(TestCase):
