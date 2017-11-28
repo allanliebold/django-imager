@@ -4,46 +4,11 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<form action="/your-name/" method="post">
-            <label for="username">Your name: </label>
-            <input id="username" type="text" name="username" value="{{ username }}">
-            <label for="phone">Your phone #: </label>
-            <input id="your_phone" type="text" name="phone" value="{{ phone }}">
-            <label for="website">Your website: </label>
-            <input id="website" type="text" name="website" value="{{ website }}">
-            <label for="location">Your city/state: </label>
-            <input id="location" type="text" name="location" value="{{ location }}">
-            <label for="fee">Your fee: </label>
-            <input id="fee" type="text" name="fee" value="{{ fee }}">
-            <label for="fee">Your camerea (choose one): </label>
-            <select name="CAMERAS">
-              <option value="CANON">Canon</option>
-              <option value="NIKON">Nikon</option>
-              <option value="SONY">Sony</option>
-              <option value="FUJIFILM">Fujifilm</option>
-            </select>
-            <label for="fee">Your services (choose all that apply: </label>
-            <select name="SERVICES" multiple>
-              <option value="WEDDINGS">Weddings</option>
-              <option value="SCHOOL">School</option>
-              <option value="FAMILY">Family</option>
-              <option value="BABIES">Babies</option>
-              <option value="NATURE">Nature</option>
-              <option value="ABSTRACT">Abstract</option>
-              <option value="OTHER">Other</option>
-            </select>
-            <label for="fee">Your style (choose all that apply: </label>
-            <select name="PHOTO_STYLES" multiple>
-              <option value="BW">Black and White</option>
-              <option value="COLOR">Color</option>
-              <option value="STILL">Still</option>
-              <option value="ACTION">Action</option>
-            </select>
-            <label for="fee">Your bio: </label>
-            <textarea name="bio"></textarea>
 
-
-            <input type="submit" value="OK">
-        </form>
+  <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="OK">
+  </form>
 
 {% endblock %}
