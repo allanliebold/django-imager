@@ -11,7 +11,7 @@ class Photo(models.Model):
     description = models.TextField(blank=True)
     date_uploaded = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    date_published = models.DateTimeField()
+    date_published = models.DateTimeField(auto_now=True)
 
     PUBLISHED = [
         ('PRIVATE', 'Private'),
@@ -19,7 +19,7 @@ class Photo(models.Model):
         ('PUBLIC', 'Public')
     ]
 
-    published = model.CharField(
+    published = models.CharField(
         max_length=10,
         choices=PUBLISHED,
         blank=True
@@ -31,12 +31,12 @@ class Album(models.Model):
     """Album Model for pictures."""
 
     user = models.ForeignKey(ImagerProfile, related_name='album')
-    photo = models.ManyToManyField(Photo)
+    photo = models.ManyToManyField(Photo, related_name='album')
     title = models.CharField(max_length=30, blank=False)
     description = models.TextField(blank=True)
     date_uploaded = models.DateTimeField(auto_now_add=True)
     date_modified = models.DateTimeField(auto_now=True)
-    date_published = models.DateTimeField()
+    date_published = models.DateTimeField(auto_now=True)
 
     PUBLISHED = [
         ('PRIVATE', 'Private'),
@@ -44,7 +44,7 @@ class Album(models.Model):
         ('PUBLIC', 'Public')
     ]
 
-    published = model.CharField(
+    published = models.CharField(
         max_length=10,
         choices=PUBLISHED,
         blank=True
