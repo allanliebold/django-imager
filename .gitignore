@@ -104,5 +104,7 @@ ENV/
 *.swp
 *.swo
 
-# Django migrations
-migrations
+# Ignore Media Files except the .gitkeep file
+!imagersite/MEDIA/*
+imagersite/MEDIA/.gitkeep
+

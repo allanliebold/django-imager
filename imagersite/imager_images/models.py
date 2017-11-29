@@ -6,7 +6,7 @@ class Photo(models.Model):
     """Photo Model that creates a photo."""
 
     user = models.ForeignKey(ImagerProfile, related_name='photo')
-    image = models.ImageField(upload_to='documents/%Y/%m/%d')
+    image = models.ImageField(upload_to='images')
     title = models.CharField(max_length=30, blank=False)
     description = models.TextField(blank=True)
     date_uploaded = models.DateTimeField(auto_now_add=True)
