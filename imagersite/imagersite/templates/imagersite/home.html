@@ -5,9 +5,7 @@
 
 {% block content %}
   {% load static %}
-  {% for rand_image in rand_images %}
-      <img src="{% static rand_image %}" alt="I am alt I am" />
-  {% endfor %}
+      <img src="{% static rand_images %}" alt="I am alt I am" />
 
   {% if request.user.is_authenticated %}
     <p>Welcome {{ request.user.username }}</p>
