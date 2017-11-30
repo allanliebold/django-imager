@@ -2,10 +2,12 @@
 """
 
 from django.conf.urls import include, url
+from django.conf.urls.static import static
 from django.contrib import admin
 from imagersite import views
 from django.contrib.auth import views as auth_views
 from imagersite import settings
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -17,5 +19,5 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(
-        settings.MEDIA_URL, document_root=setting.MEDIA_ROOT
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
     )
