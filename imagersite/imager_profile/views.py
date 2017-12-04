@@ -15,7 +15,6 @@ def profile_view(request, username=None):
             return redirect('home')
 
     profile = get_object_or_404(ImagerProfile, user__username=username)
-    import pdb; pdb.set_trace()
     photos = Photo.objects.filter(user__username=username)
     albums = Album.objects.filter(user__username=username)
 
@@ -28,7 +27,7 @@ def profile_view(request, username=None):
 
         'username': profile.user.username,
         'camera': profile.get_camera_display(),
-    #     'email': profile.user.email,
+        # 'email': profile.user.email,
         'website': profile.website,
         'fee': "{:,.2f}".format(profile.fee) if profile.fee else 0,
         'location': profile.location,
