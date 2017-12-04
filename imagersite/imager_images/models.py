@@ -25,6 +25,9 @@ class Photo(models.Model):
         blank=True
     )
 
+    def __str__(self):
+        """."""
+        return self.title
 
 
 class Album(models.Model):
@@ -49,3 +52,6 @@ class Album(models.Model):
         choices=PUBLISHED,
         blank=True
     )
+
+    def __str__(self):
+        return self.title

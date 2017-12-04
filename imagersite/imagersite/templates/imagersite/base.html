@@ -23,7 +23,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Start Bootstrap</a>
+        <a class="navbar-brand" href="#">Imager Profile</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -34,15 +34,22 @@
                 <span class="sr-only">(current)</span>
               </a>
             </li>
+
+            {% if request.user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
             </li>
+            {% else %}
             <li class="nav-item">
-              <a class="nav-link" href="#">Services</a>
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
             </li>
+            {% endif %}
+
+            {% if request.user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="{% url 'profile' %}">{{ request.user.username }}</a>
             </li>
+            {% endif %}
           </ul>
         </div>
       </div>
