@@ -5,18 +5,23 @@ from imager_profile.models import ImagerProfile
 from imager_images.models import Album, Photo
 
 
-def profile_view(request, username=None):
-    """Render the profile for a user."""
-    owner = False
-    if not username:
-        username = request.user.get_username()
-        owner = True
-        if username == '':
-            return redirect('home')
+def profile_request(request, username):
+    """."""
+    # profile = get_object_or_404(ImagerProfile, user__username=username)
+    albums = Album.objects.filter(published='PUBLIC').filter(user__user__username=username)
+    context = {
+         'albums': albums,
+         'user': username
+    }
+    return render(request, 'imager_profile/profile.html', context)
+
+
+def profile_view(request):
+    """Render the profile for logged in user."""
 
     profile = get_object_or_404(ImagerProfile, user__username=username)
-    photos = Photo.objects.filter(user__username=username)
-    albums = Album.objects.filter(user__username=username)
+    # photos = Photo.objects.filter(user=)
+    albums = Album.objects.filter(user)
 
     if not owner:
         photos = photos.filter(published='PUBLIC')
