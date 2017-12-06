@@ -108,3 +108,5 @@ ENV/
 !imagersite/MEDIA/*
 imagersite/MEDIA/.gitkeep
 
+# migrations
+migrations/
