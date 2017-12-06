@@ -61,3 +61,4 @@ class Album(models.Model):
     def __str__(self):
         """Return Album title."""
         return self.title
+

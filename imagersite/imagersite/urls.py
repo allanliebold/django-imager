@@ -7,6 +7,7 @@ from imagersite import views
 from django.contrib.auth import views as auth_views
 from imagersite import settings
 from imager_profile.views import library_view
+from imager_images.views import image_view
 
 
 urlpatterns = [
@@ -16,7 +17,8 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, {'next_page': '/'}, name='logout'),
     url(r'^accounts/', include('registration.backends.hmac.urls')),
     url(r'^profile/', include('imager_profile.urls')),
-    url(r'^images/library/$', library_view),
+    url(r'^images/library/$', library_view, name='library'),
+    url(r'^images/photos/(?P<pk>\d+)/$', image_view, name='single_image'),
 ]
 
 if settings.DEBUG:

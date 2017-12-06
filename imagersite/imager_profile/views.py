@@ -5,7 +5,7 @@ from imager_images.models import Album
 
 
 def profile_request(request, username):
-    """."""
+    """Public profile view."""
     the_user = request.user
     albums = Album.objects.filter(user=the_user).count()
     private = Album.objects.filter(user=the_user, published='PRIVATE').count()
@@ -51,4 +51,12 @@ def profile_view(request):
 
 def library_view(request):
     """View for image library."""
-    return render(request, 'imager_profile/library.html')
+    if request.user.is_authenticated:
+        the_user = request.user
+
+        albums = Album.objects.filter(user=the_user)
+        an_album = albums[0]
+        context = {'the_user': the_user,
+                   'an_album': an_album,
+                   'albums': albums}
+    return render(request, 'imager_profile/library.html', context)
