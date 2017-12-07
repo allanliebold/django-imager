@@ -105,8 +105,8 @@ ENV/
 *.swo
 
 # Ignore Media Files except the .gitkeep file
-!imagersite/MEDIA/*
-imagersite/MEDIA/.gitkeep
+imagersite/MEDIA/*
+!imagersite/MEDIA/.gitkeep
 
 # migrations
 migrations/
