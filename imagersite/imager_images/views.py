@@ -1,21 +1,20 @@
 """Views for imager_images."""
-from django.shortcuts import render
+from django.views.generic import DetailView
+from django.http import Http404
 from imager_images.models import Photo
 
 
-def image_view(request, pk):
-    """View for single images."""
-    image = Photo.objects.get(pk=pk)
-    title = image.title
-    description = image.description
-    username = image.user.username
+class ImageView(DetailView):
+    """Single image view."""
 
-    context = {
-        'image': image,
-        'description': description,
-        'title': title,
-        'username': username,
-        'pk': pk
-    }
+    template = 'imager_images/photo_detail.html'
+    model = Photo
+    image_id = 'id'
 
-    return render(request, 'imager_images/image.html', context)
+    def get_object(self):
+        """Get photo and check its public."""
+        photo = super(ImageView, self).get_object()
+        if photo.published != 'PUBLIC':
+            raise Http404('This Photo is not Public')
+
+        return photo
