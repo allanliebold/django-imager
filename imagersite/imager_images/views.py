@@ -44,10 +44,3 @@ class CreateImageView(CreateView):
         # import pdb; pdb.set_trace()
         form.instance.user = User.objects.get(username='superman')
         return super(CreateImageView, self).form_valid(form)
-
-
-# class EditAlbumView(UpdateView):
-#     """."""
-
-#     model = Album
-#     template_name = 
