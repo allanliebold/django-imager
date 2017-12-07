@@ -1,7 +1,7 @@
 """Tests for imager_profile app."""
-from django.db import models
 from django.test import TestCase
 from imager_profile.models import ImagerProfile, User
+
 
 class StandardTest(TestCase):
     """Profile tests."""
@@ -18,16 +18,3 @@ class StandardTest(TestCase):
         self.user.save()
         self.profile.user = self.user
         self.profile.save()
-        import pdb;pdb.set_trace()
-        # profile = ImagerProfile.objects.create(name='Apple')
-
-
-
-    # def test_one_profile_created_creates_one(self):
-        # """One profile created should have object length 1."""
-        # profile = ImagerProfile()
-        # user = models.OneToOneField(User, related_name='profile', null=True)
-        # user.set_password('jfaljdfra')
-        # user.save()
-        # profile.save()
-        # self.assertEqual(len(User.objects.all()), 1)
