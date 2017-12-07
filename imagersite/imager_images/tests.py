@@ -27,15 +27,14 @@ class PhotoTestCase(TestCase):
         roberto = User(username='Roberto',
                      password='p@ssw0rd')
         roberto.save()
-        j_profile = roberto.profile
-        j_profile.location = "Buffalo"
-        j_profile.save()
-        album = Album(user=j_profile, title='The Album')
+        r_profile = roberto.profile
+        r_profile.location = "Buffalo"
+        r_profile.save()
+        album = Album(user=User.objects.get(username='Roberto'), title='The Album')
         album.save()
         for i in range(30):
             photo = PhotoFactory.build()
-            photo.user = j_profile
-            # photo = Photo(user=j_profile, title=f'Pic{i}')
+            photo.user = User.objects.get(username='Roberto')
             photo.save()
             album.photo.add(photo)
         self.album = album
@@ -43,14 +42,14 @@ class PhotoTestCase(TestCase):
 
     def test_user_has_30_photos(self):
         """Test that user Roberto has 30 photo."""
-        one_user = User.objects.first()
-        self.assertEqual(one_user.profile.photo.count(), 30)
+        one_user = User.objects.get(username='Roberto')
+        self.assertEqual(one_user.photo.count(), 30)
 
 
     def test_first_photo_title_startswith_Photo(self):
         """Test that user Roberto has 30 photo."""
-        one_user = User.objects.first()
-        pic = one_user.profile.photo.first()
+        one_user = User.objects.get(username='Roberto')
+        pic = one_user.photo.first()
         self.assertTrue(pic.title.startswith('Photo'))
 
     def test_album_created(self):
@@ -66,11 +65,11 @@ class PhotoTestCase(TestCase):
 
 
     def test_album_has_photos(self):
-        """."""
+        """Check album contains the 30 photos that were created."""
         self.assertTrue(self.album.photo.count() == 30)
 
     def test_photo_with_album_points_to_album(self):
-        """."""
+        """Test photo created actually point to the album it was linked to."""
         a_photo = Photo.objects.order_by('?').first()
         self.assertTrue(self.album in a_photo.album.all())
 
