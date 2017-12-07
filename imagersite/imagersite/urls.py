@@ -8,6 +8,7 @@ from django.contrib.auth import views as auth_views
 from imagersite import settings
 from imager_profile.views import library_view
 from imager_images.views import ImageView, CreateAlbumView, CreateImageView
+from imager_images.views import EditImageView, EditAlbumView
 
 
 urlpatterns = [
@@ -21,6 +22,8 @@ urlpatterns = [
     url(r'^images/photos/(?P<pk>\d+)/$', ImageView.as_view(), name='single_image'),
     url(r'^images/albums/add/$', CreateAlbumView.as_view(), name='create_album'),
     url(r'^images/photos/add/$', CreateImageView.as_view(), name='create_image'),
+    url(r'^images/albums/(?P<pk>\d+)/edit$', EditAlbumView.as_view(), name='edit_album'),
+    url(r'^images/photos/(?P<pk>\d+)/edit$', EditImageView.as_view(), name='edit_photo'),
 ]
 
 if settings.DEBUG:

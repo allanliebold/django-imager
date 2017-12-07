@@ -1,5 +1,5 @@
 """Views for imager_images."""
-from django.views.generic import DetailView, ListView, CreateView
+from django.views.generic import DetailView, UpdateView, CreateView
 from django.http import Http404
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
@@ -44,3 +44,33 @@ class CreateImageView(CreateView):
         # import pdb; pdb.set_trace()
         form.instance.user = User.objects.get(username='superman')
         return super(CreateImageView, self).form_valid(form)
+
+
+class EditAlbumView(UpdateView):
+    """."""
+
+    template_name = 'imager_images/album_edit.html'
+    model = Album
+    success_url = reverse_lazy('library')
+    fields = ['user', 'photo', 'title', 'description']
+
+    def form_valid(self, form):
+        """."""
+        # import pdb; pdb.set_trace()
+        form.instance.user = User.objects.get(username='superman')
+        return super(EditAlbumView, self).form_valid(form)
+
+
+class EditImageView(UpdateView):
+    """."""
+
+    template_name = 'imager_images/image_edit.html'
+    model = Photo
+    success_url = reverse_lazy('library')
+    fields = ['user', 'image', 'title', 'description']
+
+    def form_valid(self, form):
+        """."""
+        # import pdb; pdb.set_trace()
+        form.instance.user = User.objects.get(username='superman')
+        return super(EditImageView, self).form_valid(form)
