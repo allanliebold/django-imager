@@ -1,0 +1,32 @@
+{% extends 'imagersite/base.html' %}
+
+
+{% block title %}User Profile Page{% endblock %}:w
+
+
+{% block main %}
+
+<div class="container">
+
+    <h1 class="my-4 text-center text-lg-left">{{ user }}'s Albums</h1>
+
+{% for album in albums %}
+    <h2 class="my-4 text-center text-lg-left">{{ album.title }}</h2>
+    <div class="row text-center text-lg-left">
+
+    {% for photo in album.photo.all %}
+        <div class="col-lg-3 col-md-4 col-xs-6">
+            <a href="/images/photos/{{photo.pk}}">
+            <img class="img-fluid img-thumbnail" src="{{ photo.image.url }}" alt="{{ photo.title }}">
+          </a>
+
+        </div>
+    {% endfor %}   
+
+    </div>
+{% endfor %}
+
+
+</div>
+<br />
+{% endblock %}
