@@ -5,13 +5,18 @@
 
 
 {% block main %}
-
+<br />
 <div class="container">
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}    
-    {{ form.as_p}}
-    <input type="submit" value="Add Album" />
-</form>
+    <div class="row">
+        <div class="col-md-3 col-sm-6 mb-4">
+            <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}    
+            {{ form.as_p}}
+            <input type="submit" value="Upload" />
+            </form>
+        </div>
+    </div>
 </div>
 <br />
 {% endblock %}
+
