@@ -1,7 +1,11 @@
 """Views for top level app."""
-
-from django.shortcuts import render
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import UpdateView
+from django.shortcuts import render, redirect
 from imager_images.models import Album
+from django.urls import reverse_lazy
+from imager_profile.forms import ProfileForm
+from .models import ImagerProfile
 
 
 def profile_request(request, username):
@@ -45,7 +49,7 @@ def profile_view(request):
     }
 
     return render(request,
-                  'imager_profile/profile_authenticated.html',
+                  'imager_profile/profile_edit.html',
                   context)
 
 
@@ -60,3 +64,23 @@ def library_view(request):
                    'an_album': an_album,
                    'albums': albums}
     return render(request, 'imager_profile/library.html', context)
+
+
+class EditProfileView(LoginRequiredMixin, UpdateView):
+    """."""
+
+    template_name = 'imager_images/profile_edit.html'
+    model = ImagerProfile
+    success_url = reverse_lazy('profile')
+    form_class = ProfileForm
+
+    def get(self, request, *args, **kwargs):
+        """."""
+        if request.user.username == ImagerProfile.objects.get(id=self.kwargs['pk']).user.username:
+            return super(EditProfileView, self).get(request, *args, **kwargs)
+        return redirect(reverse_lazy('home'))
+
+    def form_valid(self, form):
+        """."""
+        form.instance.user = self.request.user
+        return super(EditProfileView, self).form_valid(form)

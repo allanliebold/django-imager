@@ -1,28 +1,20 @@
+"""Profile Forms."""
 from django import forms
-from imager_images.models import Photo, Album
+from imager_images.models import Photo
 
 
-class PhotoForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     """Form for photo addition."""
 
     class Meta:
         """."""
 
         model = Photo
-        fields = ['title', 'description', 'published']
-        widgets = {
-            'descriptiion': forms.Textarea()
-        }
-
-
-class AlbumForm(forms.ModelForm):
-    """Form for photo addition."""
-
-    class Meta:
-        """."""
-
-        model = Photo
-        exclude = ['user', 'date_published']
-        widgets = {
-            'descriptiion': forms.Textarea()
-        }
+        fields = [
+                  'location',
+                  'phone',
+                  'fee',
+                  'published',
+                  'camera',
+                  'services',
+                  'photo_styles']
