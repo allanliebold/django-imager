@@ -1,3 +1,4 @@
 # django-imager
 
 api
+aws
