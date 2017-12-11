@@ -1,11 +1,10 @@
 {% extends 'imagersite/base.html' %}
-{% load bootstrap3 %}
 
 {% block title %}Django Imager{% endblock %}
 
 {% block content %}
   {% load static %}
-  <img src="{% static 'example.jpg' %}" alt="Image" />
+      <img src="{% static rand_images %}" alt="I am alt I am" />
 
   {% if request.user.is_authenticated %}
     <p>Welcome {{ request.user.username }}</p>

@@ -1,0 +1,68 @@
+{% extends "imagersite/base.html" %}
+
+{% block main %}
+    <!-- Page Content -->
+    <div class="container">
+
+      <!-- Portfolio Item Heading -->
+      <h1 class="my-4">Django Imager</h1>
+
+      <!-- Portfolio Item Row -->
+      <div class="row">
+
+        <div class="col-md-8">
+
+          <img class="img-fluid" src="{{ pic1 }}" alt="a random image">
+        </div>
+
+        <div class="col-md-4">
+          <h3 class="my-3">Upload Yer Images!</h3>
+          <p>An image sharing website. Display your images. Show off your work. Get work!</p>
+          <h3 class="my-3">Project Details</h3>
+          
+          <ul>
+            <li>Public images</li>
+            <li>Private images</li>
+            <li>Shared images</li>
+          </ul>
+        </div>
+
+      </div>
+      <!-- /.row -->
+
+      <!-- Related Projects Row -->
+      <h3 class="my-4">User Pics</h3>
+
+      <div class="row">
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="{{ pic2 }}" alt="">
+          </a>
+        </div>
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="{{ pic3 }}" alt="">
+          </a>
+        </div>
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="{{ pic4 }}" alt="">
+          </a>
+        </div>
+
+        <div class="col-md-3 col-sm-6 mb-4">
+          <a href="#">
+            <img class="img-fluid" src="{{ pic5 }}" alt="">
+          </a>
+        </div>
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    {% endblock %}
