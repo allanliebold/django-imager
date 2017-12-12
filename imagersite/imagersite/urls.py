@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'^profile/', include('imager_profile.urls')),
     url(r'^images/library/$', library_view, name='library'),
     url(r'^images/photos/(?P<pk>\d+)/$', image_view, name='single_image'),
+    url(r'^images/albums/(?P<pk>\d+)/$', image_view, name='single_image'),
 ]
 
 if settings.DEBUG:
