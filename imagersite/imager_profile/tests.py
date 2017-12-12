@@ -102,6 +102,12 @@ class ProfileTests(TestCase):
         user_photo_styles = active_user.profile.photo_styles
         self.assertEquals(user_photo_styles, 'CL')
 
+    def test_profile_is_active(self):
+        """Test that profile has default photo_styles."""
+        the_user = User.objects.get(username='fred')
+        self.assertTrue(the_user.is_active)
+
+
 # class UserFactory(factory.django.DjangoModelFactory):
 #     """Factory to create users."""
 #     class Meta:
