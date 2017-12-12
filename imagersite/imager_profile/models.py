@@ -16,7 +16,7 @@ class ImageActiveProfile(models.Manager):
 class ImagerProfile(models.Model):
     """Imager Profile Model."""
 
-    objects = models.Manager
+    objects = models.Manager()
     active = ImageActiveProfile()
 
     CAMERAS = (
