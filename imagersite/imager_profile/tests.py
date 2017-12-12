@@ -1,98 +1,101 @@
-"""Test module for imager profile app."""
-
+"""."""
 from django.test import TestCase
+from imager_profile.models import ImagerProfile, User
 
 import factory
-
-from imager_profile.models import ImagerProfile, User
+import random
 
 
 class UserFactory(factory.django.DjangoModelFactory):
-    """User factory to make users."""
+    """Factory for fake User."""
 
     class Meta:
-        """No idea what this is."""
-
         model = User
 
-    username = factory.Sequence(lambda n: f'Johnny{n}')
+    username = factory.Sequence(lambda n:
+                                '{}{}'.format(factory.Faker('first_name'), n))
+    email = factory.Faker('email')
 
 
-class ProfileTestCase(TestCase):
-    """Pofile test case."""
+class ProfileFactory(factory.django.DjangoModelFactory):
+    """Factory for fake ImagerProfile."""
+
+    class Meta:
+        model = ImagerProfile
+
+    website = factory.Faker('url')
+    location = factory.Faker('address')
+    fee = random.uniform(0, 100)
+    phone = factory.Faker('phone_number')
+
+
+class ProfileTests(TestCase):
+    """Tests for the imager_profile module."""
 
     def setUp(self):
-        """Setup."""
-        for i in range(30):
-            self.user = UserFactory.create()
-            self.user.save()
-            profile = self.user.profile
-            profile.location = 'Anywhere but here'
+        """Add one minimal user to the database."""
+        user = User(username='fred', email='fred@thestair.net')
+        user.set_password('password')
+        user.save()
+        user.profile.website = 'www.website.com'
+        user.profile.location = 'Planet Earth'
+        user.profile.fee = 200.00
+        user.profile.phone = '888-888-8888'
+        user.profile.camera = 'BW'
+        user.profile.services = 'SP'
+        user.profile.save()
+
+        for _ in range(10):
+            user = UserFactory.create()
+            user.set_password(factory.Faker('password'))
+            user.save()
+            profile = ProfileFactory.create(user=user)
             profile.save()
-        unique_user = User(username='Bobby',
-                           password='F@kep@ssw0rd')
-        unique_user.save()
-        profile = unique_user.profile
-        profile.location = 'Seattle'
-        profile.camera = 'NK'
-        profile.service = 'WD'
-        profile.photo_style = 'NT'
-        profile.save()
 
-    def test_user_can_point_to_profile(self):
-        """Test user can point to profile."""
-        one_user = User.objects.first()
-        self.assertIsNotNone(one_user.profile)
+    def test_profile_has_website(self):
+        """Test that a profile has a website."""
+        active_user = User.objects.get(username='fred')
+        user_website = active_user.profile.website
+        self.assertEquals(user_website, 'www.website.com')
 
-    def test_set_up_creates_31_users(self):
-        """Test setUp creates 30 users."""
-        self.assertEqual(User.objects.count(), 31)
+    def test_profile_has_location(self):
+        """Test that a profile has a location."""
+        active_user = User.objects.get(username='fred')
+        user_location = active_user.profile.location
+        self.assertEquals(user_location, 'Planet Earth')
 
-    def test_user_is_a_johnny(self):
-        """Test the first user is a Johnny."""
-        one_user = User.objects.first()
-        self.assertTrue(one_user.username.startswith('Johnny'))
+    def test_profile_has_fee(self):
+        """Test that a profile has a fee."""
+        active_user = User.objects.get(username='fred')
+        user_fee = active_user.profile.fee
+        self.assertEquals(user_fee, 200.00)
 
-    def test_user_has_location_via_profile(self):
-        """Test user has a location."""
-        one_user = User.objects.first()
-        self.assertEqual(one_user.profile.location, 'Anywhere but here')
+    def test_profile_has_phone_number(self):
+        """Test that a profile has a phone number."""
+        active_user = User.objects.get(username='fred')
+        user_phone = active_user.profile.phone
+        self.assertEquals(user_phone, '888-888-8888')
 
-    def test_user_jalen_has_film_camera(self):
-        """Test user Bobby has correct Camera choice."""
-        jalen = User.objects.last()
-        self.assertEqual(jalen.profile.get_camera_display(), 'Nikon')
+    def test_profile_has_camera(self):
+        """Test that a profile has a camera."""
+        active_user = User.objects.get(username='fred')
+        user_camera = active_user.profile.camera
+        self.assertEquals(user_camera, 'BW')
 
-    def test_user_jalen_style_is_nature(self):
-        """Test user Bobby's style is Nature."""
-        jalen = User.objects.last()
-        self.assertEqual(jalen.profile.get_photo_styles_display(), 'Color')
+    def test_profile_has_services(self):
+        """Test that profile has service."""
+        active_user = User.objects.get(username='fred')
+        user_services = active_user.profile.services
+        self.assertEquals(user_services, 'SP')
 
-    def test_user_jalen_has_printing_service(self):
-        """Test user Bobby's service is Printing."""
-        jalen = User.objects.last()
-        self.assertEqual(jalen.profile.get_services_display(), 'Wedding')
+    def test_profile_has_photo_styles(self):
+        """Test that profile has default photo_styles."""
+        active_user = User.objects.get(username='fred')
+        user_photo_styles = active_user.profile.photo_styles
+        self.assertEquals(user_photo_styles, 'CL')
 
-    def test_user_jalen_location_is_seattle(self):
-        """Test user Bobby's location is Seattle."""
-        jalen = User.objects.last()
-        self.assertEqual(jalen.profile.location, 'Seattle')
-
-    def test_str_displays_username(self):
-        """Test that username is displayed when using the print function."""
-        one_user = User.objects.last()
-        self.assertEqual(str(one_user), 'Bobby')
-
-    def test_is_active_property_returns_users_active_state(self):
-        """Test is active property returns if user is active."""
-        one_user = User.objects.last()
-        self.assertTrue(one_user.profile.is_active)
-
-    def test_active_manager_works(self):
-        """Test is active manager_works."""
-        self.assertEqual(ImagerProfile.active.count(), 31)
-
-    def test_str_attr_displays_username(self):
-        """Test that username is displayed when using str attr."""
-        one_user = User.objects.last()
-        self.assertEqual(one_user.__str__(), 'Bobby')
+    def test_profile_is_active(self):
+        """Test that profile has default photo_styles."""
+        active_user = User.objects.get(username='fred')
+        the_user = ImagerProfile.objects.get(user=active_user)
+        self.assertTrue(the_user.is_active)

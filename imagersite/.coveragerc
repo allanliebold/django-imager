@@ -1,5 +1,17 @@
 [run]
-omit = .venv/*
-source = imagersite
-         imager_images
-         imager_profile
+omit =
+    */migrations/*,
+    */tests.py
+    */__init__.py
+    */apps.py
+    .venv
+    manage.py
+    imagersite/wsgi.py
+
+
+source =
+    imagersite
+    imager_profile
+
+[report]
+show_missing = True
