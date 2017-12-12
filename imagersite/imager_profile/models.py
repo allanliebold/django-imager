@@ -1,5 +1,8 @@
-from django.db import models
+"""Profile Models."""
 from django.contrib.auth.models import User
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class ImageActiveProfile(models.Manager):
@@ -13,7 +16,7 @@ class ImageActiveProfile(models.Manager):
 class ImagerProfile(models.Model):
     """Imager Profile Model."""
 
-    objects = models.Manager
+    objects = models.Manager()
     active = ImageActiveProfile()
 
     CAMERAS = (
@@ -61,3 +64,11 @@ class ImagerProfile(models.Model):
     def is_active(self):
         """."""
         return self.user.is_active
+
+
+@receiver(post_save, sender=User)
+def create_profile(sender, **kwargs):
+    """."""
+    if kwargs['created']:
+        profile = ImagerProfile(user=kwargs['instance'])
+        profile.save()
