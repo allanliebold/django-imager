@@ -59,4 +59,7 @@ def library_view(request):
         context = {'the_user': the_user,
                    'an_album': an_album,
                    'albums': albums}
+
+    context = {}
+
     return render(request, 'imager_profile/library.html', context)

@@ -1,30 +1,36 @@
 {% extends 'imagersite/base.html' %}
 
 
-{% block title %}User Profile Page{% endblock %}:w
+{% block title %}User Profile Page{% endblock %}
 
 
 {% block main %}
 
 <div class="container">
 
+  {% if request.user.is_authenticated %}
     <h1 class="my-4 text-center text-lg-left">{{ user }}'s Albums</h1>
 
-{% for album in albums %}
-    <h2 class="my-4 text-center text-lg-left">{{ album.title }}</h2>
-    <div class="row text-center text-lg-left">
+    {% for album in albums %}
+        <h2 class="my-4 text-center text-lg-left">{{ album.title }}</h2>
+        <div class="row text-center text-lg-left">
 
-    {% for photo in album.photo.all %}
-        <div class="col-lg-3 col-md-4 col-xs-6">
-            <a href="/images/photos/{{photo.pk}}">
-            <img class="img-fluid img-thumbnail" src="{{ photo.image.url }}" alt="{{ photo.title }}">
-          </a>
+        {% for photo in album.photo.all %}
+            <div class="col-lg-3 col-md-4 col-xs-6">
+                <a href="/images/photos/{{photo.pk}}">
+                <img class="img-fluid img-thumbnail" src="{{ photo.image.url }}" alt="{{ photo.title }}">
+              </a>
+
+            </div>
+        {% endfor %}   
 
         </div>
-    {% endfor %}   
+    {% endfor %}
 
-    </div>
-{% endfor %}
+    {% else %}
+    <br />
+    <h3 class="text-center">You must be logged in to view your albums and pictures.</h3>
+    {% endif %}
 
 
 </div>
