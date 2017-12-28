@@ -7,6 +7,7 @@
 {% block main %}
 <br />
 <div class="container">
+    {% if request.user.is_authenticated %}
     <div class="row">
         <div class="col-md-3 col-sm-6 mb-4">
             <form method="POST" enctype="multipart/form-data">
@@ -16,6 +17,9 @@
             </form>
         </div>
     </div>
+    {% else %}
+    <h3 class='text-center'>You need to login to upload images.</h3>
+    {% endif %}
 </div>
 <br />
 {% endblock %}
