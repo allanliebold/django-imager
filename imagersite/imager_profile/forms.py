@@ -10,11 +10,4 @@ class ProfileForm(forms.ModelForm):
         """."""
 
         model = Photo
-        fields = [
-                  'location',
-                  'phone',
-                  'fee',
-                  'published',
-                  'camera',
-                  'services',
-                  'photo_styles']
+        fields = ['published']
