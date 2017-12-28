@@ -33,6 +33,12 @@ class CreateAlbumView(CreateView):
     success_url = reverse_lazy('library')
     fields = ['photo', 'title', 'description', 'published']
 
+    def form_valid(self, form):
+        """."""
+        logged_in_user = self.request.user.get_username()
+        form.instance.user = User.objects.get(username=logged_in_user)
+        return super(CreateAlbumView, self).form_valid(form)
+
 
 class CreateImageView(CreateView):
     """."""
@@ -45,7 +51,8 @@ class CreateImageView(CreateView):
     def form_valid(self, form):
         """."""
         # import pdb; pdb.set_trace()
-        form.instance.user = User.objects.get(username='superman')
+        logged_in_user = self.request.user.get_username()
+        form.instance.user = User.objects.get(username=logged_in_user)
         return super(CreateImageView, self).form_valid(form)
 
 
@@ -57,10 +64,16 @@ class EditAlbumView(UpdateView):
     success_url = reverse_lazy('library')
     fields = ['photo', 'title', 'description', 'published']
 
+    def get(self, request, *args, **kwargs):
+        """."""
+        if request.user.username == Album.objects.get(id=self.kwargs['pk']).user.username:
+            return super(EditAlbumView, self).get(request, *args, **kwargs)
+        return redirect(reverse_lazy('home'))
+
     def form_valid(self, form):
         """."""
-        # import pdb; pdb.set_trace()
-        form.instance.user = User.objects.get(username='superman')
+        logged_in_user = self.request.user.get_username()
+        form.instance.user = User.objects.get(username=logged_in_user)
         return super(EditAlbumView, self).form_valid(form)
 
 
@@ -80,5 +93,6 @@ class EditImageView(LoginRequiredMixin, UpdateView):
 
     def form_valid(self, form):
         """."""
-        form.instance.user = self.request.user
+        logged_in_user = self.request.user.get_username()
+        form.instance.user = User.objects.get(username=logged_in_user)
         return super(EditImageView, self).form_valid(form)
