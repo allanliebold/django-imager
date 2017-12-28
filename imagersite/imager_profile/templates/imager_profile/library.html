@@ -9,6 +9,8 @@
 <div class="container">
 
     <h1 class="my-4 text-center text-lg-left">{{ user }}'s Albums</h1>
+    <a class="btn btn-secondary" href="{% url 'create_album' %}" role="button">Create New Album</a>
+    <a class="btn btn-secondary" href="{% url 'create_image' %}" role="button">Upload New Image</a>
 
 {% for album in albums %}
     <h2 class="my-4 text-center text-lg-left">{{ album.title }}</h2>
