@@ -7,5 +7,5 @@ urlpatterns = [
     # url(r'^$', views.profile_view, name="profile"),
     url(r'(?P<username>\w+)$', profile_request, name="profile"),
     url(r'^$', profile_view, name="profile_authenticated"),
-    url(r'^/edit/$', EditProfileView.as_view(), name='profile-edit')
+    url(r'^edit/$', EditProfileView.as_view(), name='profile-edit')
 ]
