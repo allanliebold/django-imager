@@ -52,8 +52,9 @@ class ViewTestCase(TestCase):
             photo.save()
 
     def tearDown(self):
+        """Clean up sample pics."""
         del_photos = os.path.join(MEDIA_ROOT, 'images', 'sample_img*.jpg')
-        os.system('rm -rf ' + del_photos)
+        os.system('rm ' + del_photos)
 
     def test_main_view_status_code_200(self):
         """Test main view has 200 status."""
