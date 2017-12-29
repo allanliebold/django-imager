@@ -10,6 +10,8 @@ from imager_images.models import Photo
 import factory
 import os
 
+MEDIA_ROOT = settings.MEDIA_ROOT
+
 
 class PhotoFactory(factory.django.DjangoModelFactory):
     """Factory for fake Photo."""
@@ -48,6 +50,10 @@ class ViewTestCase(TestCase):
         for photo in photos:
             photo.user = user1
             photo.save()
+
+    def tearDown(self):
+        del_photos = os.path.join(MEDIA_ROOT, 'images', 'sample_img*.jpg')
+        os.system('rm -rf ' + del_photos)
 
     def test_main_view_status_code_200(self):
         """Test main view has 200 status."""
