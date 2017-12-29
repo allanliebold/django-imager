@@ -1,8 +1,15 @@
+"""Test imager_images app."""
+
 from django.test import TestCase
 from imager_images.models import Photo, Album
+from django.conf import settings
 import factory
-
+import os
+import subprocess
+import time
 from imager_profile.models import ImagerProfile, User
+
+MEDIA_ROOT = settings.MEDIA_ROOT
 
 
 class PhotoFactory(factory.django.DjangoModelFactory):
@@ -25,7 +32,7 @@ class PhotoTestCase(TestCase):
     def setUp(self):
         """Setup."""
         roberto = User(username='Roberto',
-                     password='p@ssw0rd')
+                       password='p@ssw0rd')
         roberto.save()
         r_profile = roberto.profile
         r_profile.location = "Buffalo"
@@ -39,12 +46,10 @@ class PhotoTestCase(TestCase):
             album.photo.add(photo)
         self.album = album
 
-
     def test_user_has_30_photos(self):
         """Test that user Roberto has 30 photo."""
         one_user = User.objects.get(username='Roberto')
         self.assertEqual(one_user.photo.count(), 30)
-
 
     def test_first_photo_title_startswith_Photo(self):
         """Test that user Roberto has 30 photo."""
@@ -57,12 +62,10 @@ class PhotoTestCase(TestCase):
         one_album = Album.objects.get()
         self.assertIsNotNone(one_album)
 
-
     def test_album_title_is_the_album(self):
         """Test that the album title is The Album."""
         one_album = Album.objects.get()
         self.assertEqual(one_album.title, 'The Album')
-
 
     def test_album_has_photos(self):
         """Check album contains the 30 photos that were created."""
@@ -73,3 +76,9 @@ class PhotoTestCase(TestCase):
         a_photo = Photo.objects.order_by('?').first()
         self.assertTrue(self.album in a_photo.album.all())
 
+    def test_photo_created_without_title(self):
+        """Photo created without a title should should be empty string."""
+        photo = Photo()
+        photo.user = User.objects.get(username='Roberto')
+        photo.save()
+        self.assertTrue(photo.title == '')
