@@ -1,5 +1,4 @@
 """Test imager_images app."""
-
 from django.test import TestCase
 from imager_images.models import Photo, Album
 from django.conf import settings

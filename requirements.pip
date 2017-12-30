@@ -1,4 +1,7 @@
-econfusable-homoglyphs==2.0.2
+beautifulsoup4==4.6.0
+bs4==0.0.1
+confusable-homoglyphs==2.0.2
+coverage==4.4.2
 decorator==4.1.2
 Django==1.11
 django-bootstrap3==9.1.0
