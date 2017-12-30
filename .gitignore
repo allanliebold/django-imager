@@ -104,7 +104,6 @@ ENV/
 *.swp
 *.swo
 
-# Ignore Media Files except the .gitkeep file
-imagersite/MEDIA/*
-!imagersite/MEDIA/.gitkeep
-
+# Ignore Media Files with .jpg extension
+imagersite/MEDIA/images/*.jpg
+imagersite/MEDIA/images/*.jpeg
