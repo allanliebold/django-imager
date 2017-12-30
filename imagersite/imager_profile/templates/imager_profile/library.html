@@ -12,6 +12,7 @@
     <a class="btn btn-secondary" href="{% url 'create_album' %}" role="button">Create New Album</a>
     <a class="btn btn-secondary" href="{% url 'create_image' %}" role="button">Upload New Image</a>
 
+{% if albums %}
 {% for album in albums %}
     <h2 class="my-4 text-center text-lg-left">{{ album.title }}</h2>
     <div class="row text-center text-lg-left">
@@ -23,10 +24,14 @@
           </a>
 
         </div>
-    {% endfor %}   
+    {% endfor %}
 
     </div>
 {% endfor %}
+
+{% else %}
+<h3 class="text-center">You have not created any albums yet</h3>
+{% endif %}
 
 
 </div>
