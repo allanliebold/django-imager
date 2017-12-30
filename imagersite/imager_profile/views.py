@@ -59,9 +59,7 @@ def library_view(request):
         the_user = request.user
 
         albums = Album.objects.filter(user=the_user)
-        an_album = albums[0]
         context = {'the_user': the_user,
-                   'an_album': an_album,
                    'albums': albums}
     return render(request, 'imager_profile/library.html', context)
 
