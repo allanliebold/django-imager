@@ -38,7 +38,6 @@ class AlbumView(DetailView):
 
         photo = context['object'].photo.first().image
         context['photo'] = photo
-        # import pdb; pdb.set_trace()
         return context
 
 
@@ -67,7 +66,6 @@ class CreateImageView(CreateView):
 
     def form_valid(self, form):
         """."""
-        # import pdb; pdb.set_trace()
         logged_in_user = self.request.user.get_username()
         form.instance.user = User.objects.get(username=logged_in_user)
         return super(CreateImageView, self).form_valid(form)
