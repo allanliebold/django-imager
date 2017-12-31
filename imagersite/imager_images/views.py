@@ -14,7 +14,6 @@ class ImageView(DetailView):
 
     template = 'imager_images/photo_detail.html'
     model = Photo
-    image_id = 'id'
 
     def get_object(self):
         """Get photo and check its public."""
@@ -23,6 +22,24 @@ class ImageView(DetailView):
             if photo.user.username != self.request.user.get_username():
                 raise Http404('This Photo does not belong to you')
         return photo
+
+
+class AlbumView(DetailView):
+    """Single Album view."""
+
+    template = 'imager_images/album_detail.html'
+    model = Album
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if context['object'] != 'PUBLIC':
+            if context['object'].user.username != self.request.user.get_username():
+                raise Http404('This Photo does not belong to you')
+
+        photo = context['object'].photo.first().image
+        context['photo'] = photo
+        # import pdb; pdb.set_trace()
+        return context
 
 
 class CreateAlbumView(CreateView):
