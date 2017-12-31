@@ -7,7 +7,13 @@
 {% block main %}
 
 <div class="container">
-    <img class="img-fluid img-responsive" src="{{ photo.image.url }}" alt="{{ photo.title }}"> </a>
+
+    <div class="row">
+        <div class="col-md-4">
+            <br />
+            <img class="img-thumbnail" src="{{ photo.image.url }}" alt="{{ photo.title }}"> </a>
+        </div>
+    </div>
     <br />
     <br />
     <ul class="list-group">
