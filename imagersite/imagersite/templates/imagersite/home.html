@@ -1,0 +1,32 @@
+{% extends 'imagersite/base.html' %}
+
+{% block title %}Django Imager{% endblock %}
+
+{% block content %}
+  {% load static %}
+      <img src="{% static rand_images %}" alt="I am alt I am" />
+
+  {% if request.user.is_authenticated %}
+    <p>Welcome {{ request.user.username }}</p>
+  {% else %}
+
+  <p>Welcome! We are an imager sharing website.</p>
+  {% endif %}
+
+  {% if request.user.is_authenticated %}
+    <a href="{% url 'logout' %}">
+      {% bootstrap_button "Logout" button_type="submit" button_class="btn-primary" %}
+    </a>
+  {% else %}
+    <a href="{% url 'login' %}">
+      {% bootstrap_button "Login" button_type="submit" button_class="btn-primary" %}
+    </a>
+    <a href="{% url 'registration_register' %}">
+      {% bootstrap_button "Join" button_type="submit" button_class="btn-primary" %}
+    </a>
+  {% endif %}
+
+{% endblock %}
+
+
+

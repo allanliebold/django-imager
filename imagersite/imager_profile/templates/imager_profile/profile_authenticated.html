@@ -1,0 +1,26 @@
+{% extends 'imagersite/base.html' %}
+
+
+{% block title %}User Profile Page{% endblock %}:w
+
+
+{% block main %}
+
+<div class="container">
+    {% if request.user.is_authenticated %}
+    <h1 class="my-4 text-center text-lg-left">{{ user }}'s Albums</h1>
+
+    <ul class="list-group">
+      <li class="list-group-item">Total albums: {{ total_albums }}</li>
+      <li class="list-group-item">Public albums: {{ public }}</li>
+      <li class="list-group-item">Shared albums: {{ shared }}</li>
+      <li class="list-group-item">Private albums: {{ private }}</li>
+    </ul>
+
+    {% else %}
+    <h3 class="my-4 text-center">You must be logged in to view your profile.</h3>
+    {% endif %}
+
+</div>
+<br />
+{% endblock %}

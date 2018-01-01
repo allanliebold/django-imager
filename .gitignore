@@ -99,3 +99,14 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+# vim swap files
+*.swp
+*.swo
+
+# Ignore Media Files with .jpg extension
+imagersite/MEDIA/images/*.jpg
+imagersite/MEDIA/images/*.jpeg
+
+# vscode
+.vscode
