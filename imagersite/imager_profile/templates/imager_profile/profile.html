@@ -1,22 +1,25 @@
 {% extends 'imagersite/base.html' %}
 
 
-{% block title %}User Profile Page{% endblock %}:w
+{% block title %}User Profile Page{% endblock %}
 
 
 {% block main %}
 
 <div class="container">
-
-    <h1 class="my-4 text-center text-lg-left">{{ username }}'s Albums</h1>
+  {% if user_exists %}
+  <h1 class="my-4 text-center text-lg-left">{{ username }}'s Albums</h1>
 
     <ul class="list-group">
       <li class="list-group-item">Total albums: {{ albums }}</li>
       <li class="list-group-item">Public albums: {{ public }}</li>
       <li class="list-group-item">Shared albums: {{ shared }}</li>
       <li class="list-group-item">Private albums: {{ private }}</li>
-    </ul> 
+    </ul>
 
+  {% else %}
+    <h3 class="my-4 text-center text-lg-left">{{ username }} is not a registered user</h3>
+  {% endif %}
 
 </div>
 <br />

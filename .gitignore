@@ -107,3 +107,6 @@ ENV/
 # Ignore Media Files with .jpg extension
 imagersite/MEDIA/images/*.jpg
 imagersite/MEDIA/images/*.jpeg
+
+# vscode
+.vscode
