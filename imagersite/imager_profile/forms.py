@@ -1,13 +1,19 @@
 """Profile Forms."""
 from django import forms
-from imager_images.models import Photo
+from imager_profile.models import ImagerProfile
 
 
 class ProfileForm(forms.ModelForm):
-    """Form for photo addition."""
+    """Form for profile addition."""
 
     class Meta:
         """."""
 
-        model = Photo
-        fields = ['published']
+        model = ImagerProfile
+        fields = ['location',
+                  'fee',
+                  'phone',
+                  'website',
+                  'camera',
+                  'services',
+                  'photo_styles']

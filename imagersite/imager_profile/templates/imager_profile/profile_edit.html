@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-3 col-sm-6 mb-4">
                 <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}    
+                {% csrf_token %}
                 {{ form.as_p }}
                 <input type="submit" value="Edit" />
                 </form>
@@ -24,7 +24,7 @@
 {% else %}
     <br />
     <div class="container">
-        <h3 class=text-center>You have to be the owner and logged in to edit this image.</h3>
+        <h3 class=text-center>You have to be the owner and logged in to edit your profile.</h3>
     </div>
     <br />
 {% endif %}

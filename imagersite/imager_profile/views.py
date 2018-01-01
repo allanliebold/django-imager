@@ -2,7 +2,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.views.generic import UpdateView
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from imager_images.models import Album
 from imager_profile.forms import ProfileForm
@@ -75,22 +75,21 @@ def library_view(request):
 
 
 class EditProfileView(LoginRequiredMixin, UpdateView):
-    """."""
+    """Class based to view to generate for user to update profile."""
 
-    template_name = 'imager_images/profile_edit.html'
     model = ImagerProfile
-    success_url = reverse_lazy('profile')
-    fields = ['location']
-    form_class = ProfileForm
+    fields = [
+        'phone',
+        'website',
+        'location',
+        'fee',
+        'camera',
+        'services',
+        'photo_styles']
+    template_name_suffix = '_update_form'
+    context_object_name = 'profile'
+    success_url = reverse_lazy('profile_authenticated')
 
-    def get(self, request, *args, **kwargs):
-        """."""
-        if request.user.username == ImagerProfile.objects.get(id=self.kwargs['pk']).user.username:
-            return super(EditProfileView, self).get(request, *args, **kwargs)
-        return redirect(reverse_lazy('home'))
-
-    def form_valid(self, form):
-        """."""
-        logged_in_user = self.request.user.get_username()
-        form.instance.user = User.objects.get(username=logged_in_user)
-        return super(EditProfileView, self).form_valid(form)
+    def get_object(self):
+        """Populate form."""
+        return self.request.user.profile
