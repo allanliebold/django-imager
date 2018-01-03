@@ -14,8 +14,6 @@ A simple image management website using [Django](https://www.djangoproject.com/)
 |`/profile/<username>`|profile|profile file for given user|
 |`/profile/edit`|profile_edit| edit the current user's profile|
 |`/images/library`|library|library of all the logged in user's albums and photos<br>GET: album_page: page number for albums, photo_page: page number for photos|
-|`/images/photos`|photo_gallery|gallery of all public photos|
-|`/images/albums`|album_gallery|gallery of all public albums|
 |`/images/photos/<id>`|photo_detail|detail of a single photo|
 |`/images/albums/<id>`|album_detail|detail of a single album<br>GET: page: page number for photos in the album|
 |`/images/photos/<id>/edit`|photo_edit|edit a single photo|
@@ -50,7 +48,7 @@ Install the application requirements with [`pip`](https://pip.pypa.io/en/stable/
 
 Create a [Postgres](https://wiki.postgresql.org/wiki/Detailed_installation_guides) database for use with this application.
 ```
-(ENV) django-imager $ createdb imagersite
+(ENV) django-imager $ createdb imager_db
 ```
 
 Export environmental variables pointing to the location of database, your username, hashed password, and secret
@@ -58,7 +56,7 @@ Export environmental variables pointing to the location of database, your userna
 (ENV) django-imager $ export SECRET_KEY='secret'
 (ENV) django-imager $ export DB_NAME='imagersite'
 (ENV) django-imager $ export DB_USER='(your postgresql username)'
-(ENV) django-imager $ export DB_PASS='(your postgresql password)'
+(ENV) django-imager $ export DB_PASSWORD='(your postgresql password)'
 (ENV) django-imager $ export DB_HOST='localhost'
 (ENV) django-imager $ export DEBUG='True'
 ```
@@ -78,6 +76,6 @@ Application is served on http://localhost:8000
 ## Testing
 You can test this application by first exporting an environmental variable pointing to the location of a testing database, then running the `test` command from `manage.py`.
 ```
-(ENV) django-imager $ export TEST_DB='test_imagersite'
+(ENV) django-imager $ export TEST_DB='imager_test'
 (ENV) django-imager $ python imagersite/manage.py test imagersite
 ```
