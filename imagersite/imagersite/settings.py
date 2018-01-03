@@ -143,3 +143,4 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 MEDIA_URL = '/MEDIA/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'MEDIA') # points to the MEDIA dir at the same level as manage.py
 
+SITE_ID = 1
