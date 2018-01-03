@@ -11,15 +11,16 @@
       <div class="row">
 
         <div class="col-md-8">
+          {% load static %}
 
-          <img class="img-fluid" src="{{ pic1 }}" alt="a random image">
+          <img class="img-fluid" src="{% static 'images/deep_forest_steps.jpg' %}" alt="forest steps">
         </div>
 
         <div class="col-md-4">
           <h3 class="my-3">Upload Yer Images!</h3>
           <p>An image sharing website. Display your images. Show off your work. Get work!</p>
           <h3 class="my-3">Project Details</h3>
-          
+
           <ul>
             <li>Public images</li>
             <li>Private images</li>
@@ -37,25 +38,25 @@
 
         <div class="col-md-3 col-sm-6 mb-4">
           <a href="#">
-            <img class="img-fluid" src="{{ pic2 }}" alt="">
+            <img class="img-fluid" src="{% static 'images/pier-dark-golden.jpg' %}" alt="dark golden pier">
           </a>
         </div>
 
         <div class="col-md-3 col-sm-6 mb-4">
           <a href="#">
-            <img class="img-fluid" src="{{ pic3 }}" alt="">
+            <img class="img-fluid" src="{% static 'images/pink-lotus.jpg' %}" alt="pink lotus in a pond">
           </a>
         </div>
 
         <div class="col-md-3 col-sm-6 mb-4">
           <a href="#">
-            <img class="img-fluid" src="{{ pic4 }}" alt="">
+            <img class="img-fluid" src="{% static 'images/subdued-orange.jpg' %}" alt="dark grainy rainbow background">
           </a>
         </div>
 
         <div class="col-md-3 col-sm-6 mb-4">
           <a href="#">
-            <img class="img-fluid" src="{{ pic5 }}" alt="">
+            <img class="img-fluid" src="{% static 'images/tron-room.jpg' %}" alt="Tron computer room">
           </a>
         </div>
 
