@@ -2,6 +2,8 @@
 
 **Authors**: Darren Haynes & Allan Liebold
 
+**Live ec2 instance**: [Django Imager](http://ec2-54-165-49-57.compute-1.amazonaws.com/)
+
 ## Overview
 A simple image management website using [Django](https://www.djangoproject.com/).
 
